@@ -1,0 +1,5 @@
+[s3]
+endpoint = "http://10.0.64.101:9000"
+bucket = "mywebsite.com"
+key = "AAAAAAAAAAAAAAAAAAAA"
+secret = "AaaAAAAAAaAAAaaaA000aAaaaaa+aAAaa00aA0aA"

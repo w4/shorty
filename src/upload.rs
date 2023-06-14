@@ -13,7 +13,13 @@ async fn main() -> anyhow::Result<()> {
         Ok(tokio::fs::read(&path).await?)
     },)?;
 
-    let s3 = shorty::s3_client(config.s3.key, config.s3.secret, config.s3.endpoint)?;
+    let s3 = shorty::s3_client(
+        config.s3.key,
+        config.s3.secret,
+        config.s3.endpoint,
+        config.s3.tls,
+    )
+    .await?;
 
     let name = if let Some(ext) = path.extension().and_then(|v| v.to_str()) {
         format!("{}.{}", Uuid::new_v4(), ext)

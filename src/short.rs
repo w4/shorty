@@ -8,7 +8,13 @@ async fn main() -> anyhow::Result<()> {
     let url = args.nth(1).ok_or_else(|| anyhow!("no url given"))?;
 
     let config = shorty::Config::load().await?;
-    let s3 = shorty::s3_client(config.s3.key, config.s3.secret, config.s3.endpoint)?;
+    let s3 = shorty::s3_client(
+        config.s3.key,
+        config.s3.secret,
+        config.s3.endpoint,
+        config.s3.tls,
+    )
+    .await?;
 
     let redirect = format!(r#"<meta http-equiv="refresh" content="0; URL={}" />"#, url);
     let link = gpw::PasswordGenerator::default().next().unwrap();
